@@ -14,6 +14,6 @@ public class Register extends JFrame {
         setResizable(false);
 
         container = new Container();
-        container.setBackground(Color.LIGHT_GRAY);
+        container.setBackground(Color.WHITE);
     }
 }
