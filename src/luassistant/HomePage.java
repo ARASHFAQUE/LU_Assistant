@@ -24,11 +24,6 @@ public class HomePage extends JFrame{
             Statement statement = connection.createStatement();
 
             new HomePage(connection, statement);
-            /*while(resultSet.next()){
-                String name = resultSet.getString("name");
-                int studentMark = resultSet.getInt("mark");
-                System.out.println(name + "  " + studentMark);
-            }*/
         } catch (Exception e){
             //System.out.println(e);
         }
@@ -121,7 +116,6 @@ public class HomePage extends JFrame{
         button1.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                //System.out.println("Hello World");
                 userName = textField1.getText();
                 password = textField2.getText();
                 studentID = textField3.getText();
@@ -152,10 +146,9 @@ public class HomePage extends JFrame{
                     statement.close();
                     connection.close();
 
-                    //String user_name = resultSet.getString("username");
 
                 } catch (Exception exc){
-                    exc.getStackTrace();
+                    //exc.getStackTrace();
                 }
             }
         });
@@ -175,61 +168,4 @@ public class HomePage extends JFrame{
         button2.addMouseListener(this);
         button3.addMouseListener(this);*/
     }
-
-    /*@Override
-    public void mouseClicked(MouseEvent e) {
-        if(e.getSource() == textField1){
-            textField1.setText("");
-            textField1.setBorder(border1);
-        }
-        else if(e.getSource() == textField2){
-            textField2.setText("");
-            textField2.setBorder(border1);
-        }
-        else if(e.getSource() == textField3){
-            textField3.setText("");
-            textField3.setBorder(border1);
-        }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        if(e.getSource() == button1){
-            setVisible(false);
-            String userName = textField1.getText();
-            String password = textField2.getText();
-            System.out.println(userName + "  " + password);
-            new MainPage();
-        }
-        else if(e.getSource() == button2){
-            new Register();
-        }
-        else if(e.getSource() == button3){
-            setVisible(false);
-            new AdminLogin();
-        }
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        if(e.getSource() == textField1){
-            textField1.setBorder(border2);
-        }
-        else if(e.getSource() == textField2){
-            textField2.setBorder(border2);
-        }
-        else if(e.getSource() == textField3){
-            textField3.setBorder(border2);
-        }
-    }*/
 }
