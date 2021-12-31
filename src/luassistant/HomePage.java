@@ -4,8 +4,36 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.Objects;
 
-public class HomePage extends JFrame implements MouseListener{
+public class HomePage extends JFrame{
+
+    public static void main(String[] args) {
+        try{
+            String url = "jdbc:mysql://localhost:3306/ums";
+            String userName = "root";
+            String password = "";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection connection = DriverManager.getConnection(url, userName, password);
+
+            Statement statement = connection.createStatement();
+
+            new HomePage(connection, statement);
+            /*while(resultSet.next()){
+                String name = resultSet.getString("name");
+                int studentMark = resultSet.getInt("mark");
+                System.out.println(name + "  " + studentMark);
+            }*/
+        } catch (Exception e){
+            //System.out.println(e);
+        }
+    }
+
     Container container;
     Border border1, border2;
     Font font1, font2;
@@ -13,7 +41,9 @@ public class HomePage extends JFrame implements MouseListener{
     ImageIcon img;
     JTextField textField1, textField2, textField3, textField4, textField5, textField6, textField7;
     JButton button1, button2, button3, button4;
-    HomePage(){
+    String userName, password, studentID;
+    ResultSet resultSet;
+    HomePage(Connection connection, Statement statement){
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(250, 50, 1000, 700);
@@ -64,6 +94,73 @@ public class HomePage extends JFrame implements MouseListener{
         button3.setFont(font2);
         button3.setBounds(400, 580, 200, 50);
 
+        textField1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                textField1.setText("");
+                textField1.setBorder(border1);
+            }
+        });
+
+        textField2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                textField2.setText("");
+                textField2.setBorder(border1);
+            }
+        });
+
+        textField3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                textField3.setText("");
+                textField3.setBorder(border1);
+            }
+        });
+
+        button1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                //System.out.println("Hello World");
+                userName = textField1.getText();
+                password = textField2.getText();
+                studentID = textField3.getText();
+
+                String query = "select * from users_info";
+
+                try{
+                    resultSet = statement.executeQuery(query);
+
+                    boolean matched = false;
+                    while(resultSet.next()){
+                        String user_name = resultSet.getString("username");
+                        String pass = resultSet.getString("password");
+                        String sID = resultSet.getString("s_id");
+                        if(Objects.equals(sID, studentID) && Objects.equals(user_name, userName) && Objects.equals(pass, password)){
+                            matched = true;
+                            break;
+                        }
+                    }
+
+                    if(matched){
+                        new MainPage();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Incorrect Information!", "" ,JOptionPane.WARNING_MESSAGE);
+                    }
+
+                    statement.close();
+                    connection.close();
+
+                    //String user_name = resultSet.getString("username");
+
+                } catch (Exception exc){
+                    exc.getStackTrace();
+                }
+            }
+        });
+
+
         add(label1);
         add(label2);
         add(textField1);
@@ -72,16 +169,14 @@ public class HomePage extends JFrame implements MouseListener{
         add(button1);
         add(button2);
         add(button3);
-
-        textField1.addMouseListener(this);
-        textField2.addMouseListener(this);
+        /*textField2.addMouseListener(this);
         textField3.addMouseListener(this);
         button1.addMouseListener(this);
         button2.addMouseListener(this);
-        button3.addMouseListener(this);
+        button3.addMouseListener(this);*/
     }
 
-    @Override
+    /*@Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() == textField1){
             textField1.setText("");
@@ -136,5 +231,5 @@ public class HomePage extends JFrame implements MouseListener{
         else if(e.getSource() == textField3){
             textField3.setBorder(border2);
         }
-    }
+    }*/
 }
