@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Connection;
+import java.sql.Statement;
 
 public class AdminLogin extends JFrame implements MouseListener {
     Container container;
@@ -12,7 +14,7 @@ public class AdminLogin extends JFrame implements MouseListener {
     ImageIcon img;
     JTextField textField1, textField2, textField3, textField4, textField5, textField6, textField7;
     JButton button1, button2, button3, button4;
-    AdminLogin(){
+    AdminLogin(Connection connection, Statement statement){
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(250, 50, 1000, 700);

@@ -9,23 +9,6 @@ import java.util.Objects;
 
 public class HomePage extends JFrame{
 
-    public static void main(String[] args) {
-        try{
-            String url = "jdbc:mysql://localhost:3306/ums";
-            String userName = "root";
-            String password = "";
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            Connection connection = DriverManager.getConnection(url, userName, password);
-
-            Statement statement = connection.createStatement();
-
-            new HomePage(connection, statement);
-        } catch (Exception e){
-            //System.out.println(e);
-        }
-    }
-
     Container container;
     Border border1, border2;
     Font font1, font2;
@@ -63,13 +46,13 @@ public class HomePage extends JFrame{
         label2.setFont(font1);
         label2.setBounds(450, 200, 100, 60);
 
-        textField1 = new JTextField("Enter your username");
+        textField1 = new JTextField("Enter Your Username");
         textField1.setBounds(350, 280, 300, 40);
 
-        textField2 = new JTextField("Enter your password");
+        textField2 = new JTextField("Enter Your Password");
         textField2.setBounds(350, 340, 300, 40);
 
-        textField3 = new JTextField("Enter your ID");
+        textField3 = new JTextField("Enter Your Student ID");
         textField3.setBounds(350, 400, 300, 40);
 
         font2 = new Font("Arial", Font.BOLD, 15);
@@ -134,22 +117,37 @@ public class HomePage extends JFrame{
                     }
 
                     if(matched){
-                        new MainPage();
+                        setVisible(false);
+                        new MainPage(connection, statement);
                     }
                     else{
                         JOptionPane.showMessageDialog(null, "Incorrect Information!", "" ,JOptionPane.WARNING_MESSAGE);
                     }
 
-                    statement.close();
-                    connection.close();
-
-
+                    //statement.close();
+                    //connection.close();
                 } catch (Exception exc){
                     //exc.getStackTrace();
                 }
             }
         });
 
+
+        button2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e){
+                setVisible(false);
+                new Register(connection, statement);
+            }
+        });
+
+        button3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e){
+                setVisible(false);
+                new AdminLogin(connection, statement);
+            }
+        });
 
         add(label1);
         add(label2);
@@ -159,10 +157,5 @@ public class HomePage extends JFrame{
         add(button1);
         add(button2);
         add(button3);
-        /*textField2.addMouseListener(this);
-        textField3.addMouseListener(this);
-        button1.addMouseListener(this);
-        button2.addMouseListener(this);
-        button3.addMouseListener(this);*/
     }
 }

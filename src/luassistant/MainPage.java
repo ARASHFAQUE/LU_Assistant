@@ -1,12 +1,14 @@
 package luassistant;
 
 import javax.swing.*;
+import java.sql.Connection;
+import java.sql.Statement;
 
 public class MainPage extends JFrame {
     JMenuBar menuBar;
     JMenu menu1, menu2, menu3, menu4, menu5;
     JMenuItem menuItem1, menuItem2, menuItem3, menuItem4, menuItem5, menuItem6;
-    MainPage(){
+    MainPage(Connection connection, Statement statement){
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(250, 50, 1000, 700);
