@@ -17,7 +17,6 @@ public class Register extends JFrame {
     int result;
     JMenuBar menuBar;
     JMenu menu;
-    ImageIcon imageIcon;
     Register(Connection connection, Statement statement){
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,6 +61,13 @@ public class Register extends JFrame {
         button2.setVisible(false);
         button2.setFont(font2);
 
+        menuBar = new JMenuBar();
+
+        menu = new JMenu("Back");
+
+        menuBar.add(menu);
+
+        setJMenuBar(menuBar);
 
         textField1.addMouseListener(new MouseAdapter() {
             @Override
@@ -128,6 +134,13 @@ public class Register extends JFrame {
             }
         });
 
+        menu.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setVisible(false);
+                new HomePage(connection, statement);
+            }
+        });
 
         add(label);
         add(textField1);
