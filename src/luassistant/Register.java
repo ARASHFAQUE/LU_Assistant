@@ -26,13 +26,6 @@ public class Register extends JFrame {
         setLayout(null);
         setResizable(false);
 
-        /*menuBar = new JMenuBar();
-
-        imageIcon = new ImageIcon("images\\back-arrow-2.png");
-        menu = new JMenu("" + imageIcon);
-
-        menuBar.add(menu);
-        setJMenuBar(menuBar);*/
 
         container = new Container();
         container.setBackground(Color.WHITE);
