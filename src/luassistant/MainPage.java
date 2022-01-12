@@ -10,8 +10,8 @@ import java.sql.Statement;
 
 public class MainPage extends JFrame {
     JMenuBar menuBar;
-    JMenu menu1, menu2, menu3, menu4, menu5;
-    JMenuItem menuItem1, menuItem2, menuItem3, menuItem4, menuItem5, menuItem6;
+    JMenu menu1, menu2;// menu3, menu4, menu5;
+    //JMenuItem menuItem1, menuItem2, menuItem3, menuItem4, menuItem5, menuItem6;
     JPanel panel1, panel2, panel3;
     JLabel label1, label2, label3;
     Font font1, font2;
@@ -100,9 +100,18 @@ public class MainPage extends JFrame {
         menuBar = new JMenuBar();
 
         // Placing The Menus of the Menu Bar
-        menu1 = new JMenu("Exit");
+        menu1 = new JMenu("Back");
+        menu2 = new JMenu("Exit");
 
         menu1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setVisible(false);
+                new HomePage(connection, statement);
+            }
+        });
+
+        menu2.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
@@ -119,6 +128,7 @@ public class MainPage extends JFrame {
 
         // Adding the menus
         menuBar.add(menu1);
+        menuBar.add(menu2);
 
         setJMenuBar(menuBar);
 

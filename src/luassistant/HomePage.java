@@ -18,6 +18,7 @@ public class HomePage extends JFrame{
     JButton button1, button2, button3, button4;
     String userName, password, studentID;
     ResultSet resultSet;
+    static int isLoggedIn = 0;
     HomePage(Connection connection, Statement statement){
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -99,41 +100,48 @@ public class HomePage extends JFrame{
         button1.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                setVisible(false);
-                new MainPage(connection, statement);
-                /*userName = textField1.getText();
-                password = textField2.getText();
-                studentID = textField3.getText();
+                //setVisible(false);
+                //new MainPage(connection, statement);
+                if(isLoggedIn == 1){
+                    new MainPage(connection, statement);
+                }
 
-                String query = "select * from users_info";
+                else{
+                    userName = textField1.getText();
+                    password = textField2.getText();
+                    studentID = textField3.getText();
 
-                try{
-                    resultSet = statement.executeQuery(query);
+                    String query = "select * from users_info";
 
-                    boolean matched = false;
-                    while(resultSet.next()){
-                        String user_name = resultSet.getString("username");
-                        String pass = resultSet.getString("password");
-                        String sID = resultSet.getString("s_id");
-                        if(Objects.equals(sID, studentID) && Objects.equals(user_name, userName) && Objects.equals(pass, password)){
-                            matched = true;
-                            break;
+                    try{
+                        resultSet = statement.executeQuery(query);
+
+                        boolean matched = false;
+                        while(resultSet.next()){
+                            String user_name = resultSet.getString("username");
+                            String pass = resultSet.getString("password");
+                            String sID = resultSet.getString("s_id");
+                            if(Objects.equals(sID, studentID) && Objects.equals(user_name, userName) && Objects.equals(pass, password)){
+                                matched = true;
+                                break;
+                            }
                         }
-                    }
 
-                    if(matched){
-                        setVisible(false);
-                        new MainPage(connection, statement);
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(null, "Incorrect Information!", "" ,JOptionPane.WARNING_MESSAGE);
-                    }
+                        if(matched){
+                            isLoggedIn = 1;
+                            setVisible(false);
+                            new MainPage(connection, statement);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "Incorrect Information!", "" ,JOptionPane.WARNING_MESSAGE);
+                        }
 
-                    //statement.close();
-                    //connection.close();
-                } catch (Exception exc){
-                    //exc.getStackTrace();
-                }*/
+                        //statement.close();
+                        //connection.close();
+                    } catch (Exception exc){
+                        //exc.getStackTrace();
+                    }
+                }
             }
         });
 
