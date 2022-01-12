@@ -58,15 +58,18 @@ public class HomePage extends JFrame{
         font2 = new Font("Arial", Font.BOLD, 15);
 
         button1 = new JButton("Log In");
+        button1.setBackground(Color.PINK);
         button1.setFont(font2);
         button1.setBounds(400, 460, 200, 50);
 
         button2 = new JButton("Create New Account");
         button2.setFont(font2);
+        button2.setBackground(Color.PINK);
         button2.setBounds(400, 520, 200, 50);
 
         button3 = new JButton("Log In As Admin");
         button3.setFont(font2);
+        button3.setBackground(Color.PINK);
         button3.setBounds(400, 580, 200, 50);
 
         textField1.addMouseListener(new MouseAdapter() {
@@ -96,7 +99,9 @@ public class HomePage extends JFrame{
         button1.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                userName = textField1.getText();
+                setVisible(false);
+                new MainPage(connection, statement);
+                /*userName = textField1.getText();
                 password = textField2.getText();
                 studentID = textField3.getText();
 
@@ -128,7 +133,7 @@ public class HomePage extends JFrame{
                     //connection.close();
                 } catch (Exception exc){
                     //exc.getStackTrace();
-                }
+                }*/
             }
         });
 
