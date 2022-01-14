@@ -2,21 +2,17 @@ package luassistant;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.awt.event.*;
+import java.sql.*;
 
 public class MainPage extends JFrame {
     JMenuBar menuBar;
-    JMenu menu1, menu2;// menu3, menu4, menu5;
-    //JMenuItem menuItem1, menuItem2, menuItem3, menuItem4, menuItem5, menuItem6;
+    JMenu menu1, menu2;
     JPanel panel1, panel2, panel3;
     JLabel label1, label2, label3;
     Font font1, font2;
     JButton[] buttons;
-    MainPage(Connection connection, Statement statement){
+    MainPage(Connection connection, Statement statement, int Sid){
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(250, 50, 1000, 700);
@@ -127,6 +123,14 @@ public class MainPage extends JFrame {
                 } catch (SQLException ex) {
                     //ex.printStackTrace();
                 }
+            }
+        });
+
+        buttons[0].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setVisible(false);
+                new StudentInfo(connection, statement, Sid);
             }
         });
 

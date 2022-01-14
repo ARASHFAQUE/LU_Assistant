@@ -10,8 +10,7 @@ import java.sql.Statement;
 
 public class AdminPage extends JFrame {
     JMenuBar menuBar;
-    JMenu menu1, menu2;// menu3, menu4, menu5;
-    //JMenuItem menuItem1, menuItem2, menuItem3, menuItem4, menuItem5, menuItem6;
+    JMenu menu1, menu2;
     JPanel panel1, panel2, panel3;
     JLabel label1, label2, label3;
     Font font1, font2;

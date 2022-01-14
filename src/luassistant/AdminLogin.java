@@ -17,8 +17,8 @@ public class AdminLogin extends JFrame implements MouseListener {
     Font font1, font2;
     JLabel label1, label2;
     ImageIcon img;
-    JTextField textField1, textField2, textField3, textField4, textField5, textField6, textField7;
-    JButton button1, button2, button3, button4;
+    JTextField textField1, textField2;
+    JButton button1;
     String userName, password;
     ResultSet resultSet;
     static int isAdminLoggedIn = 0;
@@ -86,7 +86,7 @@ public class AdminLogin extends JFrame implements MouseListener {
                 //setVisible(false);
                 //new MainPage(connection, statement);
                 if(isAdminLoggedIn == 1){
-                    new MainPage(connection, statement);
+                    new HomePage(connection, statement);
                 }
 
                 else{

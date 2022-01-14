@@ -14,8 +14,8 @@ public class HomePage extends JFrame{
     Font font1, font2;
     JLabel label1, label2;
     ImageIcon img;
-    JTextField textField1, textField2, textField3, textField4, textField5, textField6, textField7;
-    JButton button1, button2, button3, button4;
+    JTextField textField1, textField2, textField3;
+    JButton button1, button2, button3;
     String userName, password, studentID;
     ResultSet resultSet;
     static int isLoggedIn = 0;
@@ -101,9 +101,9 @@ public class HomePage extends JFrame{
             @Override
             public void mousePressed(MouseEvent e) {
                 //setVisible(false);
-                //new MainPage(connection, statement);
+                //new MainPage(connection, statement, 2012020129);
                 if(isLoggedIn == 1){
-                    new MainPage(connection, statement);
+                    new MainPage(connection, statement, Integer.parseInt(studentID));
                 }
 
                 else{
@@ -130,7 +130,7 @@ public class HomePage extends JFrame{
                         if(matched){
                             isLoggedIn = 1;
                             setVisible(false);
-                            new MainPage(connection, statement);
+                            new MainPage(connection, statement, Integer.parseInt(studentID));
                         }
                         else{
                             JOptionPane.showMessageDialog(null, "Incorrect Information!", "" ,JOptionPane.WARNING_MESSAGE);
