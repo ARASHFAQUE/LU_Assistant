@@ -3,7 +3,6 @@ package luassistant;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.*;
-import java.util.Objects;
 
 public class StudentInfo extends JFrame {
 
