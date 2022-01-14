@@ -7,6 +7,8 @@ import java.awt.event.*;
 import java.sql.*;
 import java.util.Objects;
 
+// Log In korle ar log in page dekhabo na Log out korle dekhabo
+
 public class HomePage extends JFrame{
 
     Container container;
@@ -19,6 +21,7 @@ public class HomePage extends JFrame{
     String userName, password, studentID;
     ResultSet resultSet;
     static int isLoggedIn = 0;
+    int s_id;
     HomePage(Connection connection, Statement statement){
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,7 +106,8 @@ public class HomePage extends JFrame{
                 //setVisible(false);
                 //new MainPage(connection, statement, 2012020129);
                 if(isLoggedIn == 1){
-                    new MainPage(connection, statement, Integer.parseInt(studentID));
+                    setVisible(false);
+                    new MainPage(connection, statement, s_id);
                 }
 
                 else{
@@ -121,6 +125,7 @@ public class HomePage extends JFrame{
                             String user_name = resultSet.getString("username");
                             String pass = resultSet.getString("password");
                             String sID = resultSet.getString("s_id");
+                            s_id = Integer.parseInt(sID);
                             if(Objects.equals(sID, studentID) && Objects.equals(user_name, userName) && Objects.equals(pass, password)){
                                 matched = true;
                                 break;
@@ -130,7 +135,7 @@ public class HomePage extends JFrame{
                         if(matched){
                             isLoggedIn = 1;
                             setVisible(false);
-                            new MainPage(connection, statement, Integer.parseInt(studentID));
+                            new MainPage(connection, statement, s_id);
                         }
                         else{
                             JOptionPane.showMessageDialog(null, "Incorrect Information!", "" ,JOptionPane.WARNING_MESSAGE);

@@ -134,6 +134,14 @@ public class MainPage extends JFrame {
             }
         });
 
+        buttons[1].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setVisible(false);
+                new OtherInformation(connection, statement, Sid);
+            }
+        });
+
 
         // Adding the menus
         menuBar.add(menu1);
