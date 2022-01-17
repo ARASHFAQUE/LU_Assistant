@@ -86,7 +86,7 @@ public class AdminLogin extends JFrame implements MouseListener {
                 //setVisible(false);
                 //new MainPage(connection, statement);
                 if(isAdminLoggedIn == 1){
-                    new HomePage(connection, statement);
+                    new LogInPage(connection, statement);
                 }
 
                 else{

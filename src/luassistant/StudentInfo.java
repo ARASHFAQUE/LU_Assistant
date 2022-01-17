@@ -21,7 +21,7 @@ public class StudentInfo extends JFrame {
     Font font;
 
     JMenuBar menuBar;
-    JMenu menu1, menu2;
+    JMenu menu1, menu2, menu3;
     StudentInfo(Connection connection, Statement statement, int Sid){
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -38,7 +38,8 @@ public class StudentInfo extends JFrame {
 
         // Placing The Menus of the Menu Bar
         menu1 = new JMenu("Back");
-        menu2 = new JMenu("Exit");
+        menu2 = new JMenu("Log Out");
+        menu3 = new JMenu("Exit");
 
         String query = "select * from student_info";
 
@@ -121,6 +122,14 @@ public class StudentInfo extends JFrame {
         menu2.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                setVisible(false);
+                new LogInPage(connection, statement);
+            }
+        });
+
+        menu3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
                 try {
                     setVisible(false);
                     connection.close();
@@ -134,6 +143,7 @@ public class StudentInfo extends JFrame {
 
         menuBar.add(menu1);
         menuBar.add(menu2);
+        menuBar.add(menu3);
 
         setJMenuBar(menuBar);
     }
@@ -151,7 +161,7 @@ class OtherInformation extends JFrame{
     Font font;
 
     JMenuBar menuBar;
-    JMenu menu1, menu2;
+    JMenu menu1, menu2, menu3;
     String studentID;
     int sID;
     OtherInformation(Connection connection, Statement statement, int Sid){
@@ -174,7 +184,8 @@ class OtherInformation extends JFrame{
 
         // Placing The Menus of the Menu Bar
         menu1 = new JMenu("Back");
-        menu2 = new JMenu("Exit");
+        menu2 = new JMenu("Log Out");
+        menu3 = new JMenu("Exit");
 
         String query = "select * from student_info";
 
@@ -245,6 +256,14 @@ class OtherInformation extends JFrame{
         menu2.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                setVisible(false);
+                new LogInPage(connection, statement);
+            }
+        });
+
+        menu3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
                 try {
                     setVisible(false);
                     connection.close();
@@ -258,6 +277,7 @@ class OtherInformation extends JFrame{
 
         menuBar.add(menu1);
         menuBar.add(menu2);
+        menuBar.add(menu3);
 
         setJMenuBar(menuBar);
     }

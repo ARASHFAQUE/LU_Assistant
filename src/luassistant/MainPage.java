@@ -101,14 +101,14 @@ public class MainPage extends JFrame {
         menuBar = new JMenuBar();
 
         // Placing The Menus of the Menu Bar
-        menu1 = new JMenu("Back");
+        menu1 = new JMenu("Log Out");
         menu2 = new JMenu("Exit");
 
         menu1.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 setVisible(false);
-                new HomePage(connection, statement);
+                new LogInPage(connection, statement);
             }
         });
 

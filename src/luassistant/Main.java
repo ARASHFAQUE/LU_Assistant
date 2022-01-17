@@ -19,7 +19,7 @@ public class Main{
         } catch (Exception e){
             //System.out.println(e);
         }
-        new HomePage(connection, statement);
+        new LogInPage(connection, statement);
     }
 }
 

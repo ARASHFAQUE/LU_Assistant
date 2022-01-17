@@ -130,7 +130,7 @@ public class Register extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 setVisible(false);
-                new HomePage(connection, statement);
+                new LogInPage(connection, statement);
             }
         });
 
@@ -138,7 +138,7 @@ public class Register extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 setVisible(false);
-                new HomePage(connection, statement);
+                new LogInPage(connection, statement);
             }
         });
 

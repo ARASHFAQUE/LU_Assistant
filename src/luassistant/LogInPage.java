@@ -9,7 +9,7 @@ import java.util.Objects;
 
 // Log In korle ar log in page dekhabo na Log out korle dekhabo
 
-public class HomePage extends JFrame{
+public class LogInPage extends JFrame{
 
     Container container;
     Border border1, border2;
@@ -22,7 +22,9 @@ public class HomePage extends JFrame{
     ResultSet resultSet;
     static int isLoggedIn = 0;
     int s_id;
-    HomePage(Connection connection, Statement statement){
+    JMenuBar menuBar;
+    JMenu menu;
+    LogInPage(Connection connection, Statement statement){
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(250, 50, 1000, 700);
@@ -39,6 +41,10 @@ public class HomePage extends JFrame{
         border2 = BorderFactory.createLineBorder(Color.BLACK, 1);
 
         img = new ImageIcon("images\\leading.png");
+
+        menuBar = new JMenuBar();
+
+        menu = new JMenu("Exit");
 
         label1 = new JLabel(img);
         label1.setBounds(350, 30, 300, 200);
@@ -105,47 +111,40 @@ public class HomePage extends JFrame{
             public void mousePressed(MouseEvent e) {
                 //setVisible(false);
                 //new MainPage(connection, statement, 2012020129);
-                if(isLoggedIn == 1){
-                    setVisible(false);
-                    new MainPage(connection, statement, s_id);
-                }
+                userName = textField1.getText();
+                password = textField2.getText();
+                studentID = textField3.getText();
 
-                else{
-                    userName = textField1.getText();
-                    password = textField2.getText();
-                    studentID = textField3.getText();
+                String query = "select * from users_info";
 
-                    String query = "select * from users_info";
+                try{
+                    resultSet = statement.executeQuery(query);
 
-                    try{
-                        resultSet = statement.executeQuery(query);
-
-                        boolean matched = false;
-                        while(resultSet.next()){
-                            String user_name = resultSet.getString("username");
-                            String pass = resultSet.getString("password");
-                            String sID = resultSet.getString("s_id");
-                            s_id = Integer.parseInt(sID);
-                            if(Objects.equals(sID, studentID) && Objects.equals(user_name, userName) && Objects.equals(pass, password)){
-                                matched = true;
-                                break;
-                            }
+                    boolean matched = false;
+                    while(resultSet.next()){
+                        String user_name = resultSet.getString("username");
+                        String pass = resultSet.getString("password");
+                        String sID = resultSet.getString("s_id");
+                        s_id = Integer.parseInt(sID);
+                        if(Objects.equals(sID, studentID) && Objects.equals(user_name, userName) && Objects.equals(pass, password)){
+                            matched = true;
+                            break;
                         }
-
-                        if(matched){
-                            isLoggedIn = 1;
-                            setVisible(false);
-                            new MainPage(connection, statement, s_id);
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(null, "Incorrect Information!", "" ,JOptionPane.WARNING_MESSAGE);
-                        }
-
-                        //statement.close();
-                        //connection.close();
-                    } catch (Exception exc){
-                        //exc.getStackTrace();
                     }
+
+                    if(matched){
+                        isLoggedIn = 1;
+                        setVisible(false);
+                        new MainPage(connection, statement, s_id);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Incorrect Information!", "" ,JOptionPane.WARNING_MESSAGE);
+                    }
+
+                    //statement.close();
+                    //connection.close();
+                } catch (Exception exc){
+                    //exc.getStackTrace();
                 }
             }
         });
@@ -166,6 +165,24 @@ public class HomePage extends JFrame{
                 new AdminLogin(connection, statement);
             }
         });
+
+        menu.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                try {
+                    setVisible(false);
+                    connection.close();
+                    statement.close();
+                    System.exit(0);
+                } catch (SQLException ex) {
+                    //ex.printStackTrace();
+                }
+            }
+        });
+
+        menuBar.add(menu);
+
+        setJMenuBar(menuBar);
 
         add(label1);
         add(label2);
