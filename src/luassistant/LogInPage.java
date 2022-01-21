@@ -20,7 +20,6 @@ public class LogInPage extends JFrame{
     JButton button1, button2, button3;
     String userName, password, studentID;
     ResultSet resultSet;
-    static int isLoggedIn = 0;
     int s_id;
     JMenuBar menuBar;
     JMenu menu;
@@ -133,7 +132,6 @@ public class LogInPage extends JFrame{
                     }
 
                     if(matched){
-                        isLoggedIn = 1;
                         setVisible(false);
                         new MainPage(connection, statement, s_id);
                     }
