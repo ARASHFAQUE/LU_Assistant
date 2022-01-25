@@ -2,6 +2,7 @@ package luassistant;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.*;
 import java.awt.event.*;
 import java.sql.*;
 
@@ -51,7 +52,7 @@ public class MainPage extends JFrame {
 
         // Second Section
 
-        label2 = new JLabel("Faculty");
+        label2 = new JLabel("Teacher");
         label2.setFont(font1);
         label2.setBounds(435, 70, 130, 60);
 
@@ -64,14 +65,10 @@ public class MainPage extends JFrame {
 
         buttons[2] = new JButton("Teacher Information");
         buttons[2].setFont(font2);
-        buttons[2].setBounds(15, 100, 250, 80);
+        buttons[2].setBounds(15, 155, 250, 80);
 
-        buttons[3] = new JButton("Other Stuff Information");
-        buttons[3].setFont(font2);
-        buttons[3].setBounds(15, 210, 250, 80);
 
         panel2.add(buttons[2]);
-        panel2.add(buttons[3]);
 
         // Third Section
 
@@ -86,16 +83,16 @@ public class MainPage extends JFrame {
         panel3.setBounds(670, 150, 280, 400);
         panel3.setBackground(Color.GREEN);
 
-        buttons[4] = new JButton("Class Routine");
+        buttons[3] = new JButton("Class Routine");
+        buttons[3].setFont(font2);
+        buttons[3].setBounds(15, 100, 250, 80);
+
+        buttons[4] = new JButton("Transport Service");
         buttons[4].setFont(font2);
-        buttons[4].setBounds(15, 100, 250, 80);
+        buttons[4].setBounds(15, 210, 250, 80);
 
-        buttons[5] = new JButton("Bus Schedule");
-        buttons[5].setFont(font2);
-        buttons[5].setBounds(15, 210, 250, 80);
-
+        panel3.add(buttons[3]);
         panel3.add(buttons[4]);
-        panel3.add(buttons[5]);
 
         // Creating a Menu Bar
         menuBar = new JMenuBar();
@@ -139,6 +136,36 @@ public class MainPage extends JFrame {
             public void mousePressed(MouseEvent e) {
                 setVisible(false);
                 new OtherInformation(connection, statement, Sid);
+            }
+        });
+
+        buttons[2].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setVisible(false);
+                new TeacherInfo(connection, statement);
+            }
+        });
+
+        buttons[3].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.lus.ac.bd/class-routine/"));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        buttons[4].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.lus.ac.bd/transport/"));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 

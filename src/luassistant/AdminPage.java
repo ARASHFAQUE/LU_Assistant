@@ -152,5 +152,13 @@ public class AdminPage extends JFrame {
         add(panel1);
         add(panel2);
         add(panel3);
+
+        buttons[0].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setVisible(true);
+                new AddStudentInfo(connection, statement);
+            }
+        });
     }
 }

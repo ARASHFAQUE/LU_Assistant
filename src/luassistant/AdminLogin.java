@@ -13,7 +13,7 @@ import java.util.Objects;
 
 public class AdminLogin extends JFrame implements MouseListener {
     Container container;
-    Border border1, border2;
+    Border border1;
     Font font1, font2;
     JLabel label1, label2;
     ImageIcon img;
@@ -83,8 +83,6 @@ public class AdminLogin extends JFrame implements MouseListener {
         button1.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                //setVisible(false);
-                //new MainPage(connection, statement);
                 if(isAdminLoggedIn == 1){
                     new LogInPage(connection, statement);
                 }
