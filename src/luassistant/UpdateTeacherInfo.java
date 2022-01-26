@@ -113,7 +113,7 @@ public class UpdateTeacherInfo extends JFrame{
             buttons[1] = new JButton("Update");
             buttons[1].setBounds(620, 200, 100, 40);
 
-            textFields[2] = new JTextField("Enter the teacher's position");
+            textFields[2] = new JTextField("Teacher's activity");
             textFields[2].setBounds(200, 250, 400, 40);
 
             buttons[2] = new JButton("Update");

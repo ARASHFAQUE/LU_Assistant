@@ -108,9 +108,7 @@ public class LogInPage extends JFrame{
         button1.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                setVisible(false);
-                new MainPage(connection, statement, 2012020129);
-                /*userName = textField1.getText();
+                userName = textField1.getText();
                 password = textField2.getText();
                 studentID = textField3.getText();
 
@@ -143,7 +141,7 @@ public class LogInPage extends JFrame{
                     //connection.close();
                 } catch (Exception exc){
                     //exc.getStackTrace();
-                }*/
+                }
             }
         });
 

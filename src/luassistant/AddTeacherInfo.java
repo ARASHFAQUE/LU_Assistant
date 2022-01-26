@@ -42,7 +42,7 @@ public class AddTeacherInfo extends JFrame{
         textFields[1] = new JTextField("Enter the teacher's email");
         textFields[1].setBounds(300, 200, 400, 40);
 
-        textFields[2] = new JTextField("Enter the teacher's position");
+        textFields[2] = new JTextField("Teacher's activity as");
         textFields[2].setBounds(300, 250, 400, 40);
 
         textFields[3] = new JTextField("Enter the teacher's department");

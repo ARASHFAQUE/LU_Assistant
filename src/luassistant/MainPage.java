@@ -143,7 +143,7 @@ public class MainPage extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 setVisible(false);
-                new TeacherInfo(connection, statement);
+                new TeacherInfo(connection, statement, Sid);
             }
         });
 
