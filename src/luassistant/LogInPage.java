@@ -7,7 +7,6 @@ import java.awt.event.*;
 import java.sql.*;
 import java.util.Objects;
 
-// Log In korle ar log in page dekhabo na Log out korle dekhabo
 
 public class LogInPage extends JFrame{
 
