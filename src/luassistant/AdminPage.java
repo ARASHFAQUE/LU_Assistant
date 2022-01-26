@@ -156,14 +156,6 @@ public class AdminPage extends JFrame {
         add(panel2);
         add(panel3);
 
-        /*menu1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                setVisible(false);
-                new AdminLogin(connection, statement);
-            }
-        });*/
-
         buttons[0].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -196,6 +188,21 @@ public class AdminPage extends JFrame {
             }
         });
 
+        buttons[4].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setVisible(false);
+                new UpdateTeacherInfo(connection, statement);
+            }
+        });
+
+        buttons[5].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setVisible(false);
+                new DeleteTeacherInfo(connection, statement);
+            }
+        });
 
         buttons[6].addMouseListener(new MouseAdapter() {
             @Override
