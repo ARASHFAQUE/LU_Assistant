@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URI;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -43,15 +44,15 @@ public class AdminPage extends JFrame {
 
         buttons[0] = new JButton("Add Student Information");
         buttons[0].setFont(font2);
-        buttons[0].setBounds(15, 100, 250, 80);
+        buttons[0].setBounds(15, 60, 250, 80);
 
         buttons[1] = new JButton("Update Student Information");
         buttons[1].setFont(font2);
-        buttons[1].setBounds(15, 210, 250, 80);
+        buttons[1].setBounds(15, 160, 250, 80);
 
         buttons[2] = new JButton("Delete Student Information");
         buttons[2].setFont(font2);
-        buttons[2].setBounds(15, 210, 250, 80);
+        buttons[2].setBounds(15, 260, 250, 80);
 
         panel1.add(buttons[0]);
         panel1.add(buttons[1]);
@@ -72,18 +73,19 @@ public class AdminPage extends JFrame {
 
         buttons[3] = new JButton("Add Teacher Information");
         buttons[3].setFont(font2);
-        buttons[3].setBounds(15, 100, 250, 80);
+        buttons[3].setBounds(15, 60, 250, 80);
 
         buttons[4] = new JButton("Update Teacher Information");
         buttons[4].setFont(font2);
-        buttons[4].setBounds(15, 210, 250, 80);
+        buttons[4].setBounds(15, 160, 250, 80);
 
-        buttons[4] = new JButton("Delete Teacher Information");
-        buttons[4].setFont(font2);
-        buttons[4].setBounds(15, 210, 250, 80);
+        buttons[5] = new JButton("Delete Teacher Information");
+        buttons[5].setFont(font2);
+        buttons[5].setBounds(15, 260, 250, 80);
 
-        panel2.add(buttons[2]);
         panel2.add(buttons[3]);
+        panel2.add(buttons[4]);
+        panel2.add(buttons[5]);
 
         // Third Section
 
@@ -98,22 +100,22 @@ public class AdminPage extends JFrame {
         panel3.setBounds(670, 150, 280, 400);
         panel3.setBackground(Color.GREEN);
 
-        buttons[4] = new JButton("Class Routine");
-        buttons[4].setFont(font2);
-        buttons[4].setBounds(15, 100, 250, 80);
+        buttons[6] = new JButton("Update Class Routine");
+        buttons[6].setFont(font2);
+        buttons[6].setBounds(15, 100, 250, 80);
 
-        buttons[5] = new JButton("Bus Schedule");
-        buttons[5].setFont(font2);
-        buttons[5].setBounds(15, 210, 250, 80);
+        buttons[7] = new JButton("Update Transport Service");
+        buttons[7].setFont(font2);
+        buttons[7].setBounds(15, 210, 250, 80);
 
-        panel3.add(buttons[4]);
-        panel3.add(buttons[5]);
+        panel3.add(buttons[6]);
+        panel3.add(buttons[7]);
 
         // Creating a Menu Bar
         menuBar = new JMenuBar();
 
         // Placing The Menus of the Menu Bar
-        menu1 = new JMenu("Back");
+        menu1 = new JMenu("Log Out");
         menu2 = new JMenu("Exit");
 
         menu1.addMouseListener(new MouseAdapter() {
@@ -123,6 +125,7 @@ public class AdminPage extends JFrame {
                 new AdminLogin(connection, statement);
             }
         });
+
 
         menu2.addMouseListener(new MouseAdapter() {
             @Override
@@ -153,11 +156,66 @@ public class AdminPage extends JFrame {
         add(panel2);
         add(panel3);
 
+        /*menu1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setVisible(false);
+                new AdminLogin(connection, statement);
+            }
+        });*/
+
         buttons[0].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                setVisible(true);
+                setVisible(false);
                 new AddStudentInfo(connection, statement);
+            }
+        });
+
+        buttons[1].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setVisible(false);
+                new UpdateStudentInfo(connection, statement);
+            }
+        });
+
+        buttons[2].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setVisible(false);
+                new DeleteStudentInfo(connection, statement);
+            }
+        });
+
+        buttons[3].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setVisible(false);
+                new AddTeacherInfo(connection, statement);
+            }
+        });
+
+
+        buttons[6].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.lus.ac.bd/class-routine/"));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        buttons[7].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://www.lus.ac.bd/transport/"));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
     }

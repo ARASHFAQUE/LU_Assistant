@@ -5,13 +5,13 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
 
-public class AdminLogin extends JFrame implements MouseListener {
+public class AdminLogin extends JFrame {
     Container container;
     Border border1;
     Font font1, font2;
@@ -21,7 +21,9 @@ public class AdminLogin extends JFrame implements MouseListener {
     JButton button1;
     String userName, password;
     ResultSet resultSet;
-    static int isAdminLoggedIn = 0;
+
+    JMenuBar menuBar;
+    JMenu menu1, menu2, menu3;
     AdminLogin(Connection connection, Statement statement){
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,6 +38,12 @@ public class AdminLogin extends JFrame implements MouseListener {
         border1 = BorderFactory.createLineBorder(Color.BLACK, 2);
 
         img = new ImageIcon("images\\leading.png");
+
+        menuBar = new JMenuBar();
+
+        // Placing The Menus of the Menu Bar
+        menu1 = new JMenu("Back");
+        menu2 = new JMenu("Exit");
 
         label1 = new JLabel(img);
         label1.setBounds(350, 30, 300, 200);
@@ -83,75 +91,65 @@ public class AdminLogin extends JFrame implements MouseListener {
         button1.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if(isAdminLoggedIn == 1){
-                    new LogInPage(connection, statement);
-                }
+                userName = textField1.getText();
+                password = textField2.getText();
 
-                else{
-                    userName = textField1.getText();
-                    password = textField2.getText();
+                String query = "select * from admin_info";
 
-                    String query = "select * from admin_info";
+                try{
+                    resultSet = statement.executeQuery(query);
 
-                    try{
-                        resultSet = statement.executeQuery(query);
-
-                        boolean matched = false;
-                        while(resultSet.next()){
-                            String user_name = resultSet.getString("username");
-                            String pass = resultSet.getString("password");
-                            if(Objects.equals(user_name, userName) && Objects.equals(pass, password)){
-                                matched = true;
-                                break;
-                            }
+                    boolean matched = false;
+                    while(resultSet.next()){
+                        String user_name = resultSet.getString("username");
+                        String pass = resultSet.getString("password");
+                        if(Objects.equals(user_name, userName) && Objects.equals(pass, password)){
+                            matched = true;
+                            break;
                         }
-
-                        if(matched){
-                            isAdminLoggedIn = 1;
-                            setVisible(false);
-                            new AdminPage(connection, statement);
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(null, "Incorrect Information!", "" ,JOptionPane.WARNING_MESSAGE);
-                        }
-
-                        //statement.close();
-                        //connection.close();
-                    } catch (Exception exc){
-                        //exc.getStackTrace();
                     }
+
+                    if(matched){
+                        setVisible(false);
+                        new AdminPage(connection, statement);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Incorrect Information!", "" ,JOptionPane.WARNING_MESSAGE);
+                    }
+
+                    //statement.close();
+                    //connection.close();
+                } catch (Exception exc){
+                    //exc.getStackTrace();
                 }
             }
         });
-    }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        if(e.getSource() == textField1){
-            textField1.setText("");
-        }
-        else if(e.getSource() == textField2){
-            textField2.setText("");
-        }
-    }
+        menu1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                setVisible(false);
+                new LogInPage(connection, statement);
+            }
+        });
 
-    @Override
-    public void mousePressed(MouseEvent e) {
+        menu2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                try {
+                    setVisible(false);
+                    connection.close();
+                    statement.close();
+                    System.exit(0);
+                } catch (SQLException ex) {
+                    //ex.printStackTrace();
+                }
+            }
+        });
 
-    }
+        menuBar.add(menu1);
+        menuBar.add(menu2);
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
+        setJMenuBar(menuBar);
     }
 }

@@ -5,17 +5,19 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.sql.Statement;
 
-public class AddStudentInfo extends JFrame {
+public class AddTeacherInfo extends JFrame{
+
     JTextField[] textFields;
     JButton button;
 
     JMenuBar menuBar;
     JMenu menu1, menu2, menu3;
     Border border;
-    AddStudentInfo(Connection connection, Statement statement){
+    AddTeacherInfo(Connection connection, Statement statement){
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(250, 50, 1000, 700);
@@ -34,41 +36,30 @@ public class AddStudentInfo extends JFrame {
 
         textFields = new JTextField[10];
 
-        textFields[0] = new JTextField("Enter the student's ID");
-        textFields[0].setBounds(300, 50, 400, 40);
+        textFields[0] = new JTextField("Enter the teacher's name");
+        textFields[0].setBounds(300, 150, 400, 40);
 
-        textFields[1] = new JTextField("Enter the student's name");
-        textFields[1].setBounds(300, 100, 400, 40);
+        textFields[1] = new JTextField("Enter the teacher's email");
+        textFields[1].setBounds(300, 200, 400, 40);
 
-        textFields[2] = new JTextField("Enter the section");
-        textFields[2].setBounds(300, 150, 400, 40);
+        textFields[2] = new JTextField("Enter the teacher's position");
+        textFields[2].setBounds(300, 250, 400, 40);
 
-        textFields[3] = new JTextField("Enter the student's CGPA");
-        textFields[3].setBounds(300, 200, 400, 40);
+        textFields[3] = new JTextField("Enter the teacher's department");
+        textFields[3].setBounds(300, 300, 400, 40);
 
-        textFields[4] = new JTextField("Enter the program");
-        textFields[4].setBounds(300, 250, 400, 40);
+        textFields[4] = new JTextField("Enter the teacher's phone number");
+        textFields[4].setBounds(300, 350, 400, 40);
 
-        textFields[5] = new JTextField("Enter the department");
-        textFields[5].setBounds(300, 300, 400, 40);
-
-        textFields[6] = new JTextField("Payment status");
-        textFields[6].setBounds(300, 350, 400, 40);
-
-        textFields[7] = new JTextField("Vaccine status");
-        textFields[7].setBounds(300, 400, 400, 40);
 
         button = new JButton("Add");
-        button.setBounds(450, 460, 100, 50);
+        button.setBounds(450, 410, 100, 50);
 
         add(textFields[0]);
         add(textFields[1]);
         add(textFields[2]);
         add(textFields[3]);
         add(textFields[4]);
-        add(textFields[5]);
-        add(textFields[6]);
-        add(textFields[7]);
 
         add(button);
 
@@ -148,42 +139,15 @@ public class AddStudentInfo extends JFrame {
             }
         });
 
-        textFields[5].addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                textFields[5].setText("");
-                textFields[5].setBorder(border);
-            }
-        });
-
-        textFields[6].addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                textFields[6].setText("");
-                textFields[6].setBorder(border);
-            }
-        });
-
-        textFields[7].addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                textFields[7].setText("");
-                textFields[7].setBorder(border);
-            }
-        });
-
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                String s_id = textFields[0].getText();
-                String s_name = textFields[1].getText();
-                String section = textFields[2].getText();
-                String cgpa = textFields[3].getText();
-                String program = textFields[4].getText();
-                String department = textFields[5].getText();
-                String payment = textFields[6].getText();
-                String vaccine = textFields[7].getText();
-                String query = "insert into student_info (sid, name, section, cgpa, program, department, payment, vaccine) values('"+s_id+"', '"+s_name+"', '"+section+"', '"+cgpa+"', '"+program+"', '"+department+"', '"+payment+"', '"+vaccine+"')";
+                String name = textFields[0].getText();
+                String email = textFields[1].getText();
+                String position = textFields[2].getText();
+                String department = textFields[3].getText();
+                String cell = textFields[4].getText();
+                String query = "insert into teacher_info (name, email, position, department, cell) values('"+name+"', '"+email+"', '"+position+"', '"+department+"', '"+cell+"')";
 
                 try{
                     statement.executeUpdate(query);
@@ -193,5 +157,6 @@ public class AddStudentInfo extends JFrame {
                 }
             }
         });
+
     }
 }
